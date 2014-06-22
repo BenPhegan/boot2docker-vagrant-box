@@ -45,4 +45,13 @@ Vagrant.configure("2") do |config|
       "--device-bootorder", "cdrom0 hdd0"
     ]
   end
+
+  config.vm.provider "vmware_fusion" do |v|
+    v.vmx["bios.bootorder"]    = "CDROM,hdd"
+    v.vmx["ide1:0.present"]    = "TRUE"
+    v.vmx["ide1:0.filename"]   = File.expand_path("../boot2docker.iso", __FILE__)
+    v.vmx["ide1:0.devicetype"] = "cdrom-image"
+    v.vmx["ide1:0.autodetect"] = "TRUE"
+    v.vmx["ide1:0.startConnected"] = "TRUE"
+  end
 end

@@ -3,7 +3,7 @@
         "name": "virtualbox",
         "type": "virtualbox-iso",
         "iso_url": "boot2docker.iso",
-        "iso_checksum": "9b9236d007d48254abd75d8f068606ce",
+        "iso_checksum": "ad9e904d592e2401db50f5c7165b18c0",
         "iso_checksum_type": "md5",
         "boot_wait": "5s",
         "ssh_username": "docker",
@@ -18,7 +18,7 @@
         "name": "parallels",
         "type": "parallels-iso",
         "iso_url": "boot2docker.iso",
-        "iso_checksum": "9b9236d007d48254abd75d8f068606ce",
+        "iso_checksum": "ad9e904d592e2401db50f5c7165b18c0",
         "iso_checksum_type": "md5",
         "boot_wait": "15s",
         "ssh_username": "docker",
@@ -29,6 +29,18 @@
         "prlctl": [
             ["set", "{{.Name}}", "--memsize", "512"]
         ]
+    },
+    {
+        "name": "vmware",
+        "type": "vmware-iso",
+        "iso_url": "boot2docker.iso",
+        "iso_checksum": "ad9e904d592e2401db50f5c7165b18c0",
+        "iso_checksum_type": "md5",
+        "boot_wait": "15s",
+        "ssh_username": "docker",
+        "ssh_password": "tcuser",
+        "shutdown_command": "sudo poweroff",
+        "guest_os_type": "other3xlinux-64"
     }],
 
     "provisioners": [{
