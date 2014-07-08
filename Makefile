@@ -1,4 +1,4 @@
-all: boot2docker-virtualbox.box boot2docker-parallels.box
+all: boot2docker-virtualbox.box boot2docker-parallels.box boot2docker-vmware.box
 
 virtualbox: boot2docker-virtualbox.box
 
@@ -16,7 +16,7 @@ boot2docker-vmware.box: boot2docker.iso template.json vagrantfile.tpl files/*
 	packer build -only vmware template.json
 
 boot2docker.iso:
-	curl -LO https://github.com/boot2docker/boot2docker/releases/download/v1.0.1/boot2docker.iso
+	curl -LO https://github.com/boot2docker/boot2docker/releases/download/v1.1.0/boot2docker.iso
 
 test: test/Vagrantfile boot2docker-virtualbox.box
 	@vagrant box add -f boot2docker boot2docker-virtualbox.box
