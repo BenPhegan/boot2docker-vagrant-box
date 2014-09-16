@@ -3,8 +3,8 @@
         "name": "virtualbox",
         "type": "virtualbox-iso",
         "iso_url": "boot2docker.iso",
-        "iso_checksum": "078dfa5bf78fe6580bd12faa3d73c334052f7ea4",
-        "iso_checksum_type": "sha1",
+        "iso_checksum": "e258919b42485e2882c71aa4255e267d",
+        "iso_checksum_type": "md5",
         "boot_wait": "5s",
         "ssh_username": "docker",
         "ssh_password": "tcuser",
@@ -18,14 +18,14 @@
         "name": "parallels",
         "type": "parallels-iso",
         "iso_url": "boot2docker.iso",
-        "iso_checksum": "078dfa5bf78fe6580bd12faa3d73c334052f7ea4",
-        "iso_checksum_type": "sha1",
+        "iso_checksum": "e258919b42485e2882c71aa4255e267d",
+        "iso_checksum_type": "md5",
         "boot_wait": "15s",
         "ssh_username": "docker",
         "ssh_password": "tcuser",
         "shutdown_command": "sudo poweroff",
         "guest_os_type": "linux",
-        "guest_os_distribution": "linux-2.6",
+        "parallels_tools_flavor": "lin",
         "prlctl": [
             ["set", "{{.Name}}", "--memsize", "512"]
         ]
@@ -34,8 +34,8 @@
         "name": "vmware",
         "type": "vmware-iso",
         "iso_url": "boot2docker.iso",
-        "iso_checksum": "078dfa5bf78fe6580bd12faa3d73c334052f7ea4",
-        "iso_checksum_type": "sha1",
+        "iso_checksum": "e258919b42485e2882c71aa4255e267d",
+        "iso_checksum_type": "md5",
         "boot_wait": "15s",
         "ssh_username": "docker",
         "ssh_password": "tcuser",
@@ -45,9 +45,19 @@
 
     "provisioners": [{
         "type": "file",
-        "source": "files/",
-        "destination": "/tmp"
-    }, {
+        "source": "./files/bootlocal.sh",
+        "destination": "/tmp/bootlocal.sh"
+    },{
+        "type": "file",
+        "source": "./files/bootsync.sh",
+        "destination": "/tmp/bootsync.sh"
+    },
+    {
+        "type": "file",
+        "source": "./files/docker-enter",
+        "destination": "/tmp/docker-enter"
+    },
+     {
         "type": "shell",
         "inline": [
             "mkfs.ext4 -F -L boot2docker-data /dev/sda",

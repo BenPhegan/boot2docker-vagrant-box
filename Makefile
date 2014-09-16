@@ -19,7 +19,7 @@ boot2docker-vmware.box: boot2docker.iso template.json vagrantfile.tpl \
 	packer build -only vmware template.json
 
 boot2docker.iso:
-	curl -LO https://github.com/boot2docker/boot2docker/releases/download/v1.1.0/boot2docker.iso
+	curl -LO https://github.com/boot2docker/boot2docker/releases/download/v1.2.0/boot2docker.iso
 
 files/docker-enter:
 	curl -L https://raw.githubusercontent.com/YungSang/docker-attach/master/docker-nsenter -o files/docker-enter
