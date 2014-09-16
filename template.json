@@ -44,31 +44,46 @@
     }],
 
     "provisioners": [{
-        "type": "file",
-        "source": "./files/bootlocal.sh",
-        "destination": "/tmp/bootlocal.sh"
-    },{
-        "type": "file",
-        "source": "./files/bootsync.sh",
-        "destination": "/tmp/bootsync.sh"
-    },
-    {
-        "type": "file",
-        "source": "./files/docker-enter",
-        "destination": "/tmp/docker-enter"
-    },
-     {
         "type": "shell",
         "inline": [
             "mkfs.ext4 -F -L boot2docker-data /dev/sda",
             "sudo /usr/local/etc/init.d/docker stop",
             "sudo /etc/rc.d/automount",
-            "sudo cp /tmp/bootsync.sh /var/lib/boot2docker/bootsync.sh",
+
+            "mkdir -p /tmp/boot2docker"
+        ]
+    }, 
+    {
+        "type": "file",
+        "source": "./files/bootlocal.sh",
+        "destination": "/tmp/boot2docker/bootlocal.sh"
+    },{
+        "type": "file",
+        "source": "./files/bootsync.sh",
+        "destination": "/tmp/boot2docker/bootsync.sh"
+    },
+    {
+        "type": "file",
+        "source": "./files/docker-enter",
+        "destination": "/tmp/boot2docker/docker-enter"
+    },{
+        "type": "file",
+        "source": "./files/oem-release",
+        "destination": "/tmp/boot2docker/oem-release"
+    },
+ {
+        "type": "shell",
+        "inline": [
+            "sudo cp /tmp/boot2docker/oem-release /var/lib/boot2docker/",
+
+            "sudo cp /tmp/boot2docker/bootsync.sh /var/lib/boot2docker/",
             "sudo chmod +x /var/lib/boot2docker/bootsync.sh",
-            "sudo cp /tmp/bootlocal.sh /var/lib/boot2docker/bootlocal.sh",
+
+            "sudo cp /tmp/boot2docker/bootlocal.sh /var/lib/boot2docker/",
             "sudo chmod +x /var/lib/boot2docker/bootlocal.sh",
+
             "sudo mkdir -p /var/lib/boot2docker/bin",
-            "sudo cp /tmp/docker-enter /var/lib/boot2docker/bin/docker-enter",
+            "sudo cp /tmp/boot2docker/docker-enter /var/lib/boot2docker/bin/",
             "sudo chmod +x /var/lib/boot2docker/bin/docker-enter"
         ]
     }],
